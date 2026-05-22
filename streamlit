@@ -1,0 +1,108 @@
+import streamlit as st
+import time
+import json
+
+st.set_page_config(layout="wide")
+
+# --------------------------
+# 初始化 session
+# --------------------------
+if "chat_history" not in st.session_state:
+    st.session_state.chat_history = []
+
+if "essay_text" not in st.session_state:
+    st.session_state.essay_text = ""
+
+if "notes_text" not in st.session_state:
+    st.session_state.notes_text = ""
+
+# --------------------------
+# 示例写作任务
+# --------------------------
+TASK = """
+Some people think that it is more effective for students to study in a group
+while others believe that it is better for them to study alone. 
+Discuss both views and give your own opinion.
+"""
+
+# --------------------------
+# 布局：两列
+# --------------------------
+col_left, col_right = st.columns(2)
+
+# ==========================
+# 左侧（Notes + Chat）
+# ==========================
+with col_left:
+
+    st.subheader("📝 Notes")
+    notes = st.text_area(
+        "Write your notes here",
+        value=st.session_state.notes_text,
+        height=200,
+        key="notes_area"
+    )
+    st.session_state.notes_text = notes
+
+    st.subheader("💬 AI Chat")
+
+    # 展示历史
+    for msg in st.session_state.chat_history:
+        st.markdown(f"**{msg['role']}**: {msg['content']}")
+
+    # 输入框
+    user_input = st.text_input("Ask AI for help")
+
+    if st.button("Send"):
+        if user_input:
+            # 模拟AI回复（这里你可以接OpenAI API）
+            ai_reply = f"(Mock AI) You asked: {user_input}"
+
+            st.session_state.chat_history.append({
+                "role": "User",
+                "content": user_input,
+                "time": time.time()
+            })
+
+            st.session_state.chat_history.append({
+                "role": "AI",
+                "content": ai_reply,
+                "time": time.time()
+            })
+
+# ==========================
+# 右侧（Task + Writing）
+# ==========================
+with col_right:
+
+    st.subheader("📌 Writing Task")
+    st.write(TASK)
+
+    st.subheader("✍️ Essay Writing")
+
+    essay = st.text_area(
+        "Start writing your essay",
+        value=st.session_state.essay_text,
+        height=300,
+        key="essay_area"
+    )
+
+    st.session_state.essay_text = essay
+
+# --------------------------
+# 数据导出（实验很关键！）
+# --------------------------
+st.subheader("📊 Export Data")
+
+data = {
+    "notes": st.session_state.notes_text,
+    "essay": st.session_state.essay_text,
+    "chat": st.session_state.chat_history
+}
+
+st.download_button(
+    label="Download JSON",
+    data=json.dumps(data, indent=2),
+    file_name="session_data.json",
+    mime="application/json"
+)
