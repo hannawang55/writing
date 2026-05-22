@@ -5,7 +5,7 @@ import sys
 import random
 
 # --- 核心配置 ---
-ADMIN_PASSWORD = "wanghy0505$"  # 修改数据管理平台入口密码
+ADMIN_PASSWORD = "xxx"  # 修改数据管理平台入口密码
 
 # 检查运行环境
 if not st.runtime.exists():
