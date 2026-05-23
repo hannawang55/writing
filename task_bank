@@ -1,0 +1,14 @@
+TASK_POOL = [
+    {
+        "id": 1,
+        "content": "Some people think that it is more effective for students to study in a group while others believe that it is better for them to study alone. Discuss both views and give your own opinion. \n\nWord limit: 250-300 words in English."
+    },
+    {
+        "id": 2,
+        "content": "Some people think technology mostly benefits our lives, while others believe it brings more disadvantages. Discuss both views and give your own opinion. \n\nWord limit: 250-300 words in English."
+    },
+    {
+        "id": 3,
+        "content": "The trend of working from home has become popular. Some say it increases productivity, while others claim it leads to isolation. Discuss both views and give your own opinion. \n\nWord limit: 250-300 words in English."
+    }
+]
