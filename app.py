@@ -10,7 +10,7 @@ from openai import OpenAI
 ADMIN_PASSWORD = "admin" 
 DATA_DIR = "experiment_data" 
 # DeepSeek 配置
-API_KEY = "sk-f116ae9291604da5a741413c458de349" 
+API_KEY = "" 
 BASE_URL = "https://api.deepseek.com"
 
 # 初始化 DeepSeek 客户端 (使用 OpenAI SDK 兼容模式)
